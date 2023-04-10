@@ -22,6 +22,10 @@
   @apply rounded-lg bg-white border-slate-300 invalid:ring-4 invalid:ring-offset-2 invalid:ring-red-600;
 }
 
+[type='checkbox'] {
+  @apply border-slate-300 focus:border-2 focus:border-blue-600;
+}
+
 .floating-label {
   @apply absolute 
   bg-white

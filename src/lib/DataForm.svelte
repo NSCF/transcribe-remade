@@ -82,7 +82,7 @@
       <textarea id="locality" class="w-full peer placeholder-transparent resize-none" rows="2" placeholder="locality"/>
       <label for="locality" style="line-height: .8;" class="floating-label">locality</label>
     </div>
-    <div class="flex gap-6">
+    <!-- <div class="flex gap-6">
       <label for="" class="flex-grow text-slate-400">latitude</label>
       <label for="" class="flex-grow text-slate-400">longitude</label>
     </div>
@@ -119,6 +119,10 @@
         <input type="text" id="londir" class="w-full peer placeholder-transparent" pattern="E|W" placeholder="londir"/>
         <label for="londir" style="line-height: .8;" class="floating-label">EW</label>
       </div>
+    </div> -->
+    <div class="relative w-full mb-3">
+      <input type="text" id="coords" class="w-full peer placeholder-transparent" placeholder="coords"/>
+      <label for="coords" style="line-height: .8;" class="floating-label">coordinates</label>
     </div>
     <div class="mb-3 max-w-full flex justify-between">
       <div class="relative w-1/4">
@@ -129,6 +133,10 @@
         <input type="text" id="altitude" class="w-full peer placeholder-transparent" placeholder="altitude"/>
         <label for="altitude" style="line-height: .8;" class="floating-label">altitude</label>
       </div>
+      <!-- <div class="relative my-auto mr-4">
+        <input type="checkbox" id="hascoords" class="w-6 h-6 rounded focus:ring-0 focus:ring-offset-0"/>
+        <label for="hascoords" class="text-slate-400" style="line-height: .8;" >coords</label>
+      </div> -->
       <div class="relative my-auto mr-4">
         <input type="checkbox" id="cultivated" class="w-6 h-6 rounded focus:ring-0 focus:ring-offset-0" placeholder="cultivated"/>
         <label for="cultivated" class="text-slate-400" style="line-height: .8;" >cultivated</label>
@@ -137,6 +145,10 @@
     <div class="relative w-full mb-3">
       <input type="text" id="habitat" class="w-full peer placeholder-transparent" placeholder="habitat"/>
       <label for="habitat" style="line-height: .8;" class="floating-label">habitat</label>
+    </div>
+    <div class="relative w-full mb-3">
+      <input type="text" id="notes" class="w-full peer placeholder-transparent" placeholder="notes"/>
+      <label for="notes" style="line-height: .8;" class="floating-label">general notes</label>
     </div>
     <button class="btn submit ml-auto">Save record</button>
   </form>
