@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+.btn {
+  @apply w-24 p-2 border border-black rounded;
+}
+
+.submit {
+  @apply block w-32 h-12 bg-teal-300;
+}
+
+.primary {
+  @apply hover:bg-teal-100;
+}
+
+[type='text'], textarea, select {
+  @apply rounded-lg bg-white border-slate-300 invalid:ring-4 invalid:ring-offset-2 invalid:ring-red-600;
+}
+
+.floating-label {
+  @apply absolute 
+  bg-white
+  rounded
+  px-1
+  left-2 
+  -top-2
+  text-gray-600 
+  text-sm 
+  transition-all 
+  peer-placeholder-shown:text-base 
+  peer-placeholder-shown:text-gray-400 
+  peer-placeholder-shown:top-3.5 
+  peer-focus:-top-2 
+  peer-focus:text-gray-600 
+  peer-focus:text-sm;
+}
