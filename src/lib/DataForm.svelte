@@ -1,12 +1,22 @@
 <script>
 
+  /**
+   * @type {import("../types/Specimen").Specimen} Specimen
+  */
+  export let record = {
+    name: 'asdfasdf',
+    expires: new Date()
+  }
+
+  console.log('recordname is', record.name)
+
 </script>
 <div class="flex flex-col h-full">
   <!-- <h1 class="text-xl mb-3">Specimen data</h1> -->
-  <form class="w-full flex-1 min-h-0 p-1 overflow-y-auto">
+  <form class="w-full flex-1 min-h-0 p-1 pt-2 overflow-y-auto">
     <div class="mb-3 w-full flex justify-between gap-2">
       <div class="relative">
-        <input type="text" id="barcode" class="w-full peer placeholder-transparent" placeholder="barcode"/>
+        <input type="text" id="barcode" class="w-full peer placeholder-transparent" placeholder="barcode" bind:value={record.name}/>
         <label for="barcode" style="line-height: .8;" class="floating-label">barcode</label>
       </div>
       <div class="relative">
