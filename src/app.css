@@ -7,7 +7,7 @@
 }
 
 .btn {
-  @apply w-24 p-2 border border-black rounded;
+  @apply p-2 border border-black rounded;
 }
 
 .submit {
@@ -17,6 +17,8 @@
 .primary {
   @apply hover:bg-teal-100;
 }
+
+
 
 [type='text'], textarea, select {
   @apply rounded-lg bg-white border-slate-300 invalid:ring-4 invalid:ring-offset-2 invalid:ring-red-600;
