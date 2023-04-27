@@ -1,5 +1,6 @@
 <script>
   import "../app.css";
+
 </script>
 
 <div class="flex flex-col w-screen h-screen overflow-hidden bg-slate-100">
@@ -8,11 +9,12 @@
       <span class="text-xl font-extralight">NSCF Scriber</span>
     </div>
     <div>
-      <button class="btn primary">Home</button>
-      <button class="btn primary">Sign in</button>
+      <a href="/" class="btn primary">Home</a>
+      <a href="/addproject" class="btn primary">Projects</a>
+      <a href="/signin" class="btn primary">Sign in</a>
     </div>
   </nav>
-  <div class="p-2 flex-1 min-h-0 border rounded">
+  <div class="p-2 w-full flex-1 min-h-0 border rounded">
     <slot />
   </div>
   

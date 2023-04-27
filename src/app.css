@@ -36,6 +36,7 @@
   text-slate-400 
   text-sm 
   transition-all 
+  duration-75
   peer-placeholder-shown:text-base 
   /* peer-placeholder-shown:text-slate-400  */
   peer-placeholder-shown:top-3.5 
