@@ -18,8 +18,6 @@
       zoomPerScroll: 2
     });
   })
-
-  $: if (images.length) console.log('image', images[0])
   
 </script>
 

@@ -1,11 +1,11 @@
-import fs from 'fs/promises'
-import path from 'path'
+//recieve a file from upload, tile it, and return the zipped buffer
 import sharp from "sharp"
 
-const fileDir =  String.raw`H:\Herbarium imaging\PRU\examples\TIFF`
-const outDir = String.raw`C:\devprojects\transcribe-remake\static\images`
+export const makeTiles = (fileBuffer) => {
+  
+}
 
-const files = await fs.readdir(fileDir)
+
 
 for (const file of files) {
   
