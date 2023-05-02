@@ -1,4 +1,7 @@
-
+images/*
+*.zip
+firebasekey.js
+nscfscriber*.json
 static/images
 .DS_Store
 node_modules

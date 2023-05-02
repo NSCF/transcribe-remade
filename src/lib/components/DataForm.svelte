@@ -4,15 +4,17 @@
   const dispatch = createEventDispatcher()
 
   /**
-   * @type {import("../../types/Specimen").Specimen} Specimen
+   * @type {import("../../types/Specimen").Specimen}
   */
   export let record = {
-    barcode: null, accessionNumber: null, primaryCollector: null, collectorNumber: null, 
+    projectID: null, batchNumber: null, specimenID: null,
+    barcodes: [], accessionNumber: null, primaryCollector: null, collectorNumber: null, 
     additionalCollectors: null, collectDay: null, collectMonth: null, collectYear: null, 
     currentName: null, detName: null, qualifier: null, typeStatus: null, 
     detBy: null, detDay: null, detMonth: null, detYear: null, detNotes: null,
     country: null, province: null, locality: null, coordinates: null, 
-    qds: null, altitude: null, isCultivated: false, habitat: null, generalNotes: null
+    qds: null, altitude: null, isCultivated: false, habitat: null, generalNotes: null,
+    capturedBy: null, capturedDate: null, checkedBy: null, checkedDate: null
   }
 
   //local vars
@@ -28,7 +30,7 @@
 
 </script>
 <div class="flex flex-col h-full">
-  <!-- <h1 class="text-xl mb-3">Specimen data</h1> -->
+  <h1 class="text-xl mb-3">Specimen data</h1>
   <form class="w-full flex-1 min-h-0 p-1 pt-2 overflow-y-auto">
     <div class="mb-3 w-full flex justify-between gap-2">
       <div class="relative">
@@ -125,7 +127,6 @@
         <input type="text" id="detyear" class="w-full peer placeholder-transparent" placeholder="detyear" bind:value={record.detYear} />
         <label for="detyear" style="line-height: .8;" class="floating-label">det. year</label>
       </div>
-      
     </div>
     {#if isQC}
       <div class="relative w-full mb-3">

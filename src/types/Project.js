@@ -1,16 +1,20 @@
+/**@typedef {number} Timestamp*/
+
 /**
  * @typedef {Object} Project
  * @prop {?string} [projectID]
  * @prop {?string} [projectName]
- * @prop {?number} [dateCreated]
+ * @prop {?string} [notes] Specific notes or instructions for this project, e.g. which fields to capture
  * @prop {?string} [createdBy]
- * @prop {?number} [totalImages]
- * @prop {?number} [totalBatches]
- * @prop {?number} [batchesComplete]
- * @prop {?number} [totalPercentageComplete]
- * @prop {?boolean} [closed]
- * @prop {?string} [closedBy]
- * @prop {?number} [timestampClosed]
+ * @prop {?Timestamp} [createdDate]
+ * @prop {?number} [specimenCount]
+ * @prop {?number} [batchSize]
+ * @prop {?number} [batchCount]
+ * @prop {?number} [capturedRecordCount]
+ * @prop {?number} [checkedRecordCount]
+ * @prop {?boolean} [isCompleted]
+ * @prop {?string} [completedBy]
+ * @prop {?Timestamp} [completedDate]
  */
 
 export default {}; //needed to make it a module...

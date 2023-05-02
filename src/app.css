@@ -18,9 +18,7 @@
   @apply hover:bg-teal-100;
 }
 
-
-
-[type='text'], textarea, select {
+[type='text'], [type='number'], textarea, select {
   @apply rounded-lg bg-white border-slate-300 invalid:ring-4 invalid:ring-offset-2 invalid:ring-red-600;
 }
 

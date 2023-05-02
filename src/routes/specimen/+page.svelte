@@ -32,8 +32,6 @@
     }
   }
 
-  
-
 </script>
 
 <div class="grid w-full h-full grid-cols-3 gap-1">
