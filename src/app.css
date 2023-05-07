@@ -7,15 +7,19 @@
 }
 
 .btn {
-  @apply p-2 border border-black rounded;
+  @apply p-2 rounded;
 }
 
-.submit {
-  @apply block w-32 h-12 bg-teal-300;
+.nav {
+  @apply border border-black;
 }
 
 .primary {
-  @apply hover:bg-teal-100;
+  @apply block h-12 text-white bg-amber-600 hover:ring-2;
+}
+
+.secondary {
+  @apply block h-12 text-white bg-teal-400 hover:ring-2;
 }
 
 [type='text'], [type='number'], textarea, select {

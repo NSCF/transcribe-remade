@@ -5,7 +5,8 @@
  * @prop {?string} [projectID]
  * @prop {?string} [batchNumber]
  * @prop {?string} [specimenID] An identifier for the dwc:Occurrence / collecting event / series, because barcodes are often unique to sheets...
- * @prop {?string[]} [barcodes]
+ * @prop {boolean} [isCoreFields] 
+ * @prop {?string} [barcodes]
  * @prop {?string} [accessionNumber]
  * @prop {?string} [primaryCollector]
  * @prop {?string} [collectorNumber]
@@ -13,8 +14,8 @@
  * @prop {?number} [collectDay]
  * @prop {?number} [collectMonth]
  * @prop {?number} [collectYear]
- * @prop {?string} [currentName]
- * @prop {?string} [detName]
+ * @prop {?string} [currentName] The latest name on the specimen
+ * @prop {?string} [typeName] The name that this is a type for, if different to currentName
  * @prop {?string} [qualifier]
  * @prop {?string} [typeStatus]
  * @prop {?string} [detBy]

@@ -41,8 +41,8 @@
   let duplicateFileNames = []
 
   const handleProjectData = async ev => {
-    uploadFiles = ev.details.files 
-    delete ev.details.files
+    uploadFiles = ev.detail.files 
+    delete ev.detail.files
     Object.assign(projectRecord, ev.detail)
     await createProject()
   }

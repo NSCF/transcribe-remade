@@ -9,7 +9,8 @@
     notes: null,
     batchSize: null,
     invitedParticipants: [], //a list of profiles and email addresses
-    files: []
+    files: [],
+    isCoreFieldsProject: false
   }
 
   let fileInput = null
@@ -46,21 +47,26 @@
     record.invitedParticipants = record.invitedParticipants //svelte
   }
 
+
 </script>
 
 <div class="flex flex-col h-full">
   <h1 class="text-xl mb-3">Create a new project</h1>
   <form class="w-full flex-1 min-h-0 p-1 pt-2 overflow-y-auto">
-    <div class="relative w-full mb-3">
+    <div class="relative w-full mb-2">
       <input type="text" id="projectname" class="w-full peer placeholder-transparent" placeholder="project name" bind:value={record.projectName} />
       <label for="projectname" style="line-height: .8;" class="floating-label">project name</label>
+    </div>
+    <div class="relative mb-2">
+      <input type="checkbox" id="isCoreFields" class="w-6 h-6 rounded focus:ring-0 focus:ring-offset-0" placeholder="cultivated" bind:value={record.isCoreFieldsProject} />
+      <label for="isCoreFields" class="text-slate-400 hover:cursor-help" style="line-height: .8;" title="Set to record only barcode, species name, taxon and province">Core fields only</label>
     </div>
     <div class="relative w-full mb-1">
       <textarea id="notes" class="w-full peer placeholder-transparent resize-none" rows="2" placeholder="notes" bind:value={record.notes} />
       <label for="notes" style="line-height: .8;" class="floating-label">instructions or notes</label>
     </div>
     <div class="relative mb-3">
-      <input type="number" id="batchsize" class="peer placeholder-transparent" min="20" step="10" placeholder="batch size" bind:value={record.batchSize} />
+      <input type="number" id="batchsize" class="w-1/2 peer placeholder-transparent" min="20" step="10" placeholder="batch size" bind:value={record.batchSize} />
       <label for="batchsize" style="line-height: .8;" class="floating-label">batch size (minimum 20)</label>
     </div>
     <InviteParticipantInput on:user={handleInvitedParticipant} />
@@ -73,9 +79,10 @@
     {/if}
     <div class="relative w-full mb-3">
       <label for="imageupload">Select images for this project</label>
+      <br/>
       <input type="file" name="imageupload" id="imageupload" accept="image/*" multiple bind:this={fileInput}>
     </div>
-    <button type="submit" class="block ml-auto p-2 border rounded bg-teal-300" on:click|preventDefault={emitData}>Create and upload</button>
+    <button type="submit" class="btn primary ml-auto" on:click|preventDefault={emitData}>Create and upload</button>
   </form>
 </div>
 

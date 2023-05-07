@@ -9,9 +9,9 @@
       <a href="/" class="text-xl font-extralight">NSCF Scriber</a>
     </div>
     <div>
-      <a href="/" class="btn primary">Home</a>
-      <a href="/addproject" class="btn primary">Projects</a>
-      <a href="/signin" class="btn primary">Sign in</a>
+      <a href="/" class="btn nav">Home</a>
+      <a href="/addproject" class="btn nav">Projects</a>
+      <a href="/signin" class="btn nav">Sign in</a>
     </div>
   </nav>
   <div class="p-2 w-full flex-1 min-h-0 border rounded">
