@@ -4,7 +4,7 @@
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher()
 
-  let record = {
+  let formData = {
     projectName: null,
     notes: null,
     batchSize: null,
@@ -17,7 +17,7 @@
 
   const emitData = _ => {
     //confirm fields are populated
-    if(record.projectName && record.projectName.length > 5 && record.batchSize >= 20) {
+    if(formData.projectName && formData.projectName.length > 5 && formData.batchSize >= 20) {
 
       if(fileInput.files.length == 0) {
         alert('files need to be selected')
@@ -25,8 +25,8 @@
       }
 
       if (fileInput.files.length > 10) {
-        record.files = fileInput.files
-        dispatch('project-data', record)
+        formData.files = fileInput.files
+        dispatch('project-data', formData)
       }
       else {
         alert('it\'s only worth doing this for large number of images...')
@@ -38,13 +38,13 @@
   }
 
   const handleInvitedParticipant = ev => {
-    record.invitedParticipants = [...record.invitedParticipants, ev.detail]
+    formData.invitedParticipants = [...formData.invitedParticipants, ev.detail]
   }
 
   const removeParticipant = ev => {
     const removeIndex = ev.detail
-    record.invitedParticipants.splice(removeIndex, 1)
-    record.invitedParticipants = record.invitedParticipants //svelte
+    formData.invitedParticipants.splice(removeIndex, 1)
+    formData.invitedParticipants = formData.invitedParticipants //svelte
   }
 
 
@@ -54,25 +54,33 @@
   <h1 class="text-xl mb-3">Create a new project</h1>
   <form class="w-full flex-1 min-h-0 p-1 pt-2 overflow-y-auto">
     <div class="relative w-full mb-2">
-      <input type="text" id="projectname" class="w-full peer placeholder-transparent" placeholder="project name" bind:value={record.projectName} />
+      <input type="text" id="projectname" class="w-full peer placeholder-transparent" placeholder="project name" bind:value={formData.projectName} />
       <label for="projectname" style="line-height: .8;" class="floating-label">project name</label>
     </div>
-    <div class="relative mb-2">
-      <input type="checkbox" id="isCoreFields" class="w-6 h-6 rounded focus:ring-0 focus:ring-offset-0" placeholder="cultivated" bind:value={record.isCoreFieldsProject} />
-      <label for="isCoreFields" class="text-slate-400 hover:cursor-help" style="line-height: .8;" title="Set to record only barcode, species name, taxon and province">Core fields only</label>
+    <div class="mb-2 flex items-center">
+      <div class="relative ">
+        <input type="checkbox" id="isCoreFields" class="w-6 h-6 rounded focus:ring-0 focus:ring-offset-0" placeholder="cultivated" bind:value={formData.isCoreFieldsProject} />
+        <label for="isCoreFields" class="text-slate-400 hover:cursor-help" style="line-height: .8;" >Core fields only</label>
+      </div>
+      <span class="text-gray-400 ml-2" title="Set to include only barcode, species name, taxon and province values for records in this project">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+        </svg>
+      </span>
     </div>
     <div class="relative w-full mb-1">
-      <textarea id="notes" class="w-full peer placeholder-transparent resize-none" rows="2" placeholder="notes" bind:value={record.notes} />
+      <textarea id="notes" class="w-full peer placeholder-transparent resize-none" rows="2" placeholder="notes" bind:value={formData.notes} />
       <label for="notes" style="line-height: .8;" class="floating-label">instructions or notes</label>
     </div>
     <div class="relative mb-3">
-      <input type="number" id="batchsize" class="w-1/2 peer placeholder-transparent" min="20" step="10" placeholder="batch size" bind:value={record.batchSize} />
+      <input type="number" id="batchsize" class="w-1/2 peer placeholder-transparent" min="20" step="10" placeholder="batch size" bind:value={formData.batchSize} />
       <label for="batchsize" style="line-height: .8;" class="floating-label">batch size (minimum 20)</label>
     </div>
     <InviteParticipantInput on:user={handleInvitedParticipant} />
-    {#if record.invitedParticipants.length > 0}
+    {#if formData.invitedParticipants.length > 0}
+      <span>Invitees</span>
       <div class="relative mb-3 w-full flex flex-wrap gap-1">
-        {#each record.invitedParticipants as details, index}
+        {#each formData.invitedParticipants as details, index}
           <ParticipantBadge {details} {index} on:remove={removeParticipant} />
         {/each}
       </div>

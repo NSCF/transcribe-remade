@@ -14,6 +14,8 @@ import {
   where,
   or,
   getDocs, 
+  arrayUnion, 
+  arrayRemove as fbArrayRemove
 } from "firebase/firestore";
 
 const firestore = getFirestore(app)
@@ -75,10 +77,34 @@ async function updateRecord(collectionName, recordID, data){
 }
 
 async function deleteRecord(collectionName, recordID){
-  const ref = getDocRef(collectionName, projectID)
+  const ref = getDocRef(collectionName, recordID)
   try {
     await deleteDoc(ref) 
     return
+  }
+  catch(err) {
+    throw err
+  }
+}
+
+async function arrayAppend(collectionName, recordID, arrayName, appendValue) {
+  const ref = getDocRef(collectionName, recordID)
+  try {
+    await updateDoc(ref, {
+      [arrayName]: arrayUnion(appendValue)
+    })
+  }
+  catch(err) {
+    throw err
+  }
+}
+
+async function arrayRemove(collectionName, recordID, arrayName, removeValue) {
+  const ref = getDocRef(collectionName, recordID)
+  try {
+    await updateDoc(ref, {
+      [arrayName]: fbArrayRemove(removeValue)
+    })
   }
   catch(err) {
     throw err
@@ -102,7 +128,6 @@ async function queryCollection(collectionName, queryParams) {
 
 const projects = {
   get: projectID => getRecord('projects', projectID),
-  add: (data) => addRecord('projects', data),
   set: (projectID, data) => setRecord('projects', projectID, data),
   update: (projectID, data) => updateRecord('projects', projectID, data),
   delete: projectID => deleteRecord('projects', projectID),
@@ -121,6 +146,20 @@ const projectParticipants = {
   set: (projectID, data) => setRecord('projectParticipants', projectID, data),
   delete: projectID => deleteRecord('projectParticipants', projectID),
   query: queryParams => queryCollection('projectParticipants', queryParams), 
+  /**
+   * @param {string} projectID 
+   * @param {('invitedUsers'|'currentParticipants'|'declinedParticipants'|'previousParticipants')} participantList The list to add the user to
+   * @param {*} userID The user ID to add to the list
+   * @returns 
+   */
+  arrayAppend: (projectID, participantList, userID) => arrayAppend('projectParticipants', projectID, participantList, userID),
+  /**
+   * @param {string} projectID 
+   * @param {('invitedUsers'|'currentParticipants'|'declinedParticipants'|'previousParticipants')} participantList The list to remove the user from
+   * @param {*} userID The user to remove
+   * @returns 
+   */
+  arrayRemove: (projectID, participantList, userID) => arrayRemove('projectParticipants', projectID, participantList, userID)
 }
 
 const specimenImages = {
@@ -131,7 +170,6 @@ const specimenImages = {
 
 const specimens = {
   get: specimenRecordID => getRecord('specimens', specimenRecordID),
-  add: (data) => addRecord('specimens', data),
   set: (specimenRecordID, data) => setRecord('specimens', specimenRecordID, data),
   update: (specimenRecordID, data) => updateRecord('specimens', specimenRecordID, data),
   delete: specimenRecordID => deleteRecord('specimens', specimenRecordID),
@@ -146,16 +184,13 @@ const userProfiles = {
   query: qryParams => queryCollection('userProfiles', qryParams), 
 }
 
-const existingUserProjects = {
-  get: userID => getRecord('existingUserProjects', userID),
-  set: (userID, data) => setRecord('existingUserProjects', userID, data),
-  delete: userID => deleteRecord('existingUserProjects', userID),
-}
-
-const newUserProjects = {
-  get: normalizedEmail => getRecord('newUserProjects', normalizedEmail),
-  set: (normalizedEmail, data) => setRecord('newUserProjects', normalizedEmail, data),
-  delete: normalizedEmail => deleteRecord('newUserProjects', normalizedEmail),
+const userProjects = {
+  get: userID => getRecord('userProjects', userID),
+  set: (userID, data) => setRecord('userProjects', userID, data),
+  delete: userID => deleteRecord('userProjects', userID),
+  //no query, we don't need to query these...
+  arrayAppend: (userID, arrayName, newValue) => arrayAppend('userProjects', userID, arrayName, newValue),
+  arrayRemove: (userID, arrayName, valueToRemove) => arrayRemove('userProjects', userID, arrayName, valueToRemove)
 }
 
 
@@ -167,8 +202,7 @@ const out = {
   specimenImages,
   specimens,
   userProfiles,
-  existingUserProjects,
-  newUserProjects
+  userProjects
 }
 
 export default out

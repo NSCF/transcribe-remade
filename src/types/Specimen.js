@@ -4,7 +4,7 @@
  * @typedef {Object} Specimen
  * @prop {?string} [projectID]
  * @prop {?string} [batchNumber]
- * @prop {?string} [specimenID] An identifier for the dwc:Occurrence / collecting event / series, because barcodes are often unique to sheets...
+ * @prop {?string} [specimenID] An identifier for the dwc:Occurrence / collecting event / series, because barcodes are often unique to sheets. Typically the trimmed down barcode...
  * @prop {boolean} [isCoreFields] 
  * @prop {?string} [barcodes]
  * @prop {?string} [accessionNumber]
