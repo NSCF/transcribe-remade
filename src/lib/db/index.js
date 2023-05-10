@@ -1,9 +1,21 @@
 import firestore from './firebase/firestore.js'
 
-export const projects = firestore.projects
-export const projectBatches = firestore.projectBatches
-export const projectParticipants = firestore.projectParticipants
-export const specimenImages = firestore.specimenImages
-export const specimens = firestore.specimens
-export const userProfiles = firestore.userProfiles
-export const userProjects = firestore.userProjects
+const projects = firestore.projects
+const projectBatches = firestore.projectBatches
+const projectParticipants = firestore.projectParticipants
+const specimenImages = firestore.specimenImages
+const specimens = firestore.specimens
+const userProfiles = firestore.userProfiles
+const userProjects = firestore.userProjects
+
+const db = {
+  projects,
+  projectBatches, 
+  projectParticipants,
+  specimenImages,
+  specimens,
+  userProfiles,
+  userProjects
+}
+
+export default db

@@ -1,3 +1,4 @@
+import { makeID } from '../../utils/makeID.js'
 import getSpecimenIdentifierFromBarcode from "../../utils/getSpecimenIdentifierFromBarcode.js"
 
 export const areFileNamesUnique = fileList => {

@@ -148,18 +148,18 @@ const projectParticipants = {
   query: queryParams => queryCollection('projectParticipants', queryParams), 
   /**
    * @param {string} projectID 
-   * @param {('invitedUsers'|'currentParticipants'|'declinedParticipants'|'previousParticipants')} participantList The list to add the user to
+   * @param {('invitedUsers'|'currentParticipants'|'declinedParticipants'|'previousParticipants')} list The list to add the user to
    * @param {*} userID The user ID to add to the list
    * @returns 
    */
-  arrayAppend: (projectID, participantList, userID) => arrayAppend('projectParticipants', projectID, participantList, userID),
+  addUser: (projectID, list, userID) => arrayAppend('projectParticipants', projectID, list, userID),
   /**
    * @param {string} projectID 
-   * @param {('invitedUsers'|'currentParticipants'|'declinedParticipants'|'previousParticipants')} participantList The list to remove the user from
+   * @param {('invitedUsers'|'currentParticipants'|'declinedParticipants'|'previousParticipants')} list The list to remove the user from
    * @param {*} userID The user to remove
    * @returns 
    */
-  arrayRemove: (projectID, participantList, userID) => arrayRemove('projectParticipants', projectID, participantList, userID)
+  removeUser: (projectID, list, userID) => arrayRemove('projectParticipants', projectID, list, userID)
 }
 
 const specimenImages = {
@@ -189,8 +189,8 @@ const userProjects = {
   set: (userID, data) => setRecord('userProjects', userID, data),
   delete: userID => deleteRecord('userProjects', userID),
   //no query, we don't need to query these...
-  arrayAppend: (userID, arrayName, newValue) => arrayAppend('userProjects', userID, arrayName, newValue),
-  arrayRemove: (userID, arrayName, valueToRemove) => arrayRemove('userProjects', userID, arrayName, valueToRemove)
+  addProject: (userID, list, projectID) => arrayAppend('userProjects', userID, list, projectID),
+  removeProject: (userID, list, projectID) => arrayRemove('userProjects', userID, list, projectID)
 }
 
 

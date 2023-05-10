@@ -17,6 +17,7 @@
  * @prop {?boolean} [isCompleted]
  * @prop {?string} [completedBy]
  * @prop {?Timestamp} [completedDate]
+ * @prop {?Object} [participants]
  */
 
 export default {}; //needed to make it a module...

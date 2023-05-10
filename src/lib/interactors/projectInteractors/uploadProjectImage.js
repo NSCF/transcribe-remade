@@ -1,6 +1,7 @@
 //this breaks the dependency rule a bit because here we shouldn't know about File, fetch or FormData (the internet is an IO device...)
 
 /**
+ * Note the server does the database work for each image
  * @param {string} projectID 
  * @param {File} file 
  */
