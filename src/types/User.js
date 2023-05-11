@@ -1,7 +1,7 @@
 /**@typedef {number} Timestamp*/
 
 /**
- * @typedef {Object} UserProfile
+ * @typedef {Object} User
  * @prop {?string} [userID]
  * @prop {?string} [firstName]
  * @prop {?string} [lastName]

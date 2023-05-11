@@ -1,4 +1,4 @@
-export const normalizeEmail = function(emailString) {
+const normalizeEmail = function(emailString) {
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
   if(emailRegex.test(emailString)) {
     const parts = emailString.split('@')
@@ -10,3 +10,5 @@ export const normalizeEmail = function(emailString) {
     throw new Error('invalid email')
   }
 }
+
+export default normalizeEmail

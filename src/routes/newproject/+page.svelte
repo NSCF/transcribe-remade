@@ -3,7 +3,7 @@
   import ProjectForm from "$lib/components/ProjectForm.svelte";
   import {createProject, uploadProjectImage} from '$lib/interactors/projectInteractors'
 
- /** @type {UserProfile} */
+ /** @type {User} */
  export let user = null
 
   let uploading = false
