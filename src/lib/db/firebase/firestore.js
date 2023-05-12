@@ -44,21 +44,18 @@ async function getRecord(collectionName, recordID){
   }
 }
 
-async function addRecord(collectionName, data){
-  try {
-    const docRef =  await addDoc(collection(firestore, collectionName), data) 
-    return docRef
-  }
-  catch(err) {
-    throw err
-  }
-}
-
+//rule: we can't overwrite records...
 async function setRecord(collectionName, recordID, data){
   const ref = getDocRef(collectionName, recordID)
   try {
-    await setDoc(ref, data) 
-    return
+    const docSnap =  await getDoc(ref) 
+    if (docSnap.exists()) {
+      throw new Error('record already exists, cannot overwrite')
+    }
+    else {
+      await setDoc(ref, data) 
+      return
+    }
   }
   catch(err) {
     throw err

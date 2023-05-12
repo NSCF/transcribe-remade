@@ -1,5 +1,4 @@
-
-const comparisonOperators = {
+export const comparisonOperators = {
   $eq: '==',
   $gt: '>',
   $gte: '>=',
@@ -16,21 +15,23 @@ const comparisonOperators = {
 }
 
 //these operators require an array on the right...
-const arrayComparisonOperators = ['$in', '$nin', '$any']
+export const arrayComparisonOperators = ['$in', '$nin', '$any']
 
-const logicalOperators = ['$and', '$or'] //these are the only ones that firestore uses
+//TODO we need $not
+export const logicalOperators = ['$and', '$or'] //these are the only ones that firestore uses
 
-const isComparisonOperator = function(op) {
-  return comparisonOperators.includes(op)
+export const isComparisonOperator = function(op) {
+  return Object.keys(comparisonOperators).includes(op)
 }
 
-const isLogicalOperator = function(op) {
+export const isLogicalOperator = function(op) {
   return logicalOperators.includes(op)
 }
 
-// const isValidOperator = function(op) {
-//   return isComparisonOperator(op) || isLogicalOperator(op)
-// }
+export const isValidOperator = function(op) {
+  return isComparisonOperator(op) || isLogicalOperator(op)
+}
+
 
 const parseFieldValue = function(field, value, where) {
   if(Array.isArray(value)){

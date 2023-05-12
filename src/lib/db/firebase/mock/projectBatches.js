@@ -69,7 +69,14 @@ for (const project of projects) {
 
         batches[i].checkedBy = checkedBy
 
-        batches[i].checkStartDate = faker.date.between(batches[i].captureEndDate, Date.now()).getTime()
+        //not perfect but it will do
+        if (batches[i].captureEndDate > Date.now()) {
+          batches[i].checkStartDate = Date.now()
+        }
+        else {
+          batches[i].checkStartDate = faker.date.between(batches[i].captureEndDate, Date.now()).getTime()
+        }
+
         let minsToComplete = faker.datatype.number({max: 1800})
         batches[i].checkEndDate = batches[i].checkStartDate + (minsToComplete * 60 * 1000)
 
@@ -86,7 +93,12 @@ for (const project of projects) {
     for (const [index, batch] of partiallyChecked.entries()) {
       batch.recordsChecked = faker.datatype.number({max: batch.specimenCount})
       batch.checkedBy = contributors[index]
-      batch.checkStartDate = faker.date.between(batch.captureEndDate, Date.now()).getTime()
+      try {
+        batch.checkStartDate = faker.date.between(batch.captureEndDate, Date.now()).getTime()
+      }
+      catch {
+        batch.checkStartDate = Date.now()
+      }
       project.checkedRecordCount += batch.recordsChecked
     }
 
