@@ -1,13 +1,13 @@
 import projectParticipants from "./projectParticipants.js";
 import users from "./users.js";
 
-/**@type {Object<string, import("../../../../types/UserProjects.js").UserProjects>} */
+/**@type {Object<string, import("../../../types/UserProjects.js").UserProjects>} */
 const userProjects = {}
 
 //make sure we have a userProjects record for all users...
-for (const user of users) {
+for (const user of Object.values(users)) {
   userProjects[user.userID] = {
-    acceptedProjects: [],
+    currentProjects: [],
     invitedProjects: []
   }
 }
@@ -19,7 +19,7 @@ for (const [projectID, participants] of Object.entries(projectParticipants)) {
   }
 
   for (const userID of participants.currentParticipants) {
-    userProjects[userID].acceptedProjects.push(projectID)
+    userProjects[userID].currentProjects.push(projectID)
   }
 
 }

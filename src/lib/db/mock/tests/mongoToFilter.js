@@ -3,9 +3,15 @@
 import { compileMongoQuery } from 'mongo-query-compiler'
 
 Array.prototype.query = function(mongoQry) {
-  if (!mongoQry) {
-    throw new Error('mongo qry must be provided')
+
+  if  (typeof mongoQry != 'object' || Array.isArray(mongoQry)) {
+    throw new Error('query selector must be an object or null')
   }
+  
+  if (mongoQry == null || Object.keys(mongoQry).length == 0) {
+    return this
+  }
+
   try {
     const qryFunction = compileMongoQuery(mongoQry)
     return this.filter(qryFunction)
@@ -13,6 +19,7 @@ Array.prototype.query = function(mongoQry) {
   catch(err) {
     throw err
   }
+
 }
 
 //the firestore example, for testing...
@@ -39,24 +46,26 @@ const cities = [
     regions: ["jingjinji", "hebei"] }
 ]
 
-const mongoQry = {
-  $or: [ 
-    {
-      $and: [
-        {country: 'USA'},
-        {
-          population: {
-            $lt: 1000000
-          }
-        }
-    ]
-    },
-    {name: 'Beijing'}
-  ]
-}
+// const mongoQry = {
+//   $or: [ 
+//     {
+//       $and: [
+//         {country: 'USA'},
+//         {
+//           population: {
+//             $lt: 1000000
+//           }
+//         }
+//     ]
+//     },
+//     {name: 'Beijing'}
+//   ]
+// }
 
-// let filtered = cities.query(mongoQry)
-// let i = 0
+const mongoQry = null //this should return all
+
+let filtered = cities.query(mongoQry)
+let i = 0
 
 
 

@@ -1,3 +1,6 @@
+//converts mongo style query selectors to firestore queries
+//I couldn't find a library that does this...
+
 export const comparisonOperators = {
   $eq: '==',
   $gt: '>',

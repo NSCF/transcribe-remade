@@ -1,13 +1,13 @@
 import { faker } from '@faker-js/faker/locale/en_ZA';
-import { makeID } from '../../../utils/makeID.js';
-import normalizeEmail from '../../../utils/normalizeEmail.js';
+import { makeID } from '../../utils/makeID.js';
+import normalizeEmail from '../../utils/normalizeEmail.js';
 
 /**
- * @type {User[]}
+ * @type {Object<string, User>}
  */
-const users = []
+const users = {}
 
-while (users.length < 20) {
+while (Object.values(users).length < 20) {
   /**@type {User}*/
   const user = {
     userID: makeID(5),
@@ -19,7 +19,7 @@ while (users.length < 20) {
   user.email = faker.internet.email(user.firstName, user.lastName)
   user.searchEmail = normalizeEmail(user.email)
 
-  users.push(user)
+  users[user.userID] = user
 }
 
 export default users

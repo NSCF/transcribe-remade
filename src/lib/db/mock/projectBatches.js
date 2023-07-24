@@ -4,16 +4,18 @@
 import { faker } from '@faker-js/faker/locale/en_ZA';
 import projects from './projects.js'
 import projectParticipants from './projectParticipants.js'
+import { makeID } from '../../utils/makeID.js';
 
 let projectBatches = []
 
-for (const project of projects) {
+for (const project of Object.values(projects)) {
   const batches = []
   let batchNumber = 1
   
   while(batches.length < project.batchCount) {
-    /**@type {import('../../../../types/ProjectBatch.js').ProjectBatch} */
+    /**@type {import('../../../types/ProjectBatch.js').ProjectBatch} */
     const batchRecord = {
+      projectBatchID: makeID(),
       projectID: project.projectID,
       batchNumber,
       specimenCount: project.batchSize, //we fix the last one below
@@ -116,7 +118,9 @@ for (const project of projects) {
 
   }
 
-  projectBatches = [...projectBatches, ...batches]
+  for (const batch of batches) {
+    projectBatches[batch.projectBatchID] = batch
+  }
 
 }
 

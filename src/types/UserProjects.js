@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} UserProjects
- * @prop {string[]} acceptedProjects
+ * @prop {string[]} currentProjects
  * @prop {string[]} invitedProjects
  */
 

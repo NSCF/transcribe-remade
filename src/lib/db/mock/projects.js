@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker/locale/en_ZA';
-import { makeID } from '../../../utils/makeID.js';
+import { makeID } from '../../utils/makeID.js';
 import users from './users.js'
 
-/**@type {import("../../../../types/Project").Project[]} */
-const projects = []
+/**@type {import("../../../types/Project.js").Project[]} */
+const projects = {}
 
 const projectNames = [
   'PRE Senecio 2023', 
@@ -14,14 +14,16 @@ const projectNames = [
   'BOL Iridaceae 2022 Batch 1'
 ]
 
-while (projects.length < 5) {
+const userList = Object.values(users)
+
+while (Object.values(projects).length < 5) {
   const project = {
     projectID: makeID(),
-    projectName: projectNames[projects.length],
+    projectName: projectNames[Object.keys(projects).length],
     isCoreFieldsProject: faker.datatype.boolean(),
     notes: faker.lorem.sentence(5),
     isActive: faker.datatype.boolean(),
-    createdBy: users[Math.floor(Math.random() * users.length)].userID, 
+    createdBy: userList[faker.datatype.number({max: userList.length - 1})].userID, 
     createdDate: faker.date.past().getTime(),
     specimenCount: faker.datatype.number({min: 1000, max: 5000}),
     capturedRecordCount: 0,
@@ -35,7 +37,7 @@ while (projects.length < 5) {
 
   project.batchCount = Math.ceil(project.specimenCount / project.batchSize),
 
-  projects.push(project)
+  projects[project.projectID] = project
 
 }
 

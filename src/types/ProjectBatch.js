@@ -2,6 +2,7 @@
 
 /**
  * @typedef {Object} ProjectBatch
+ * @prop {?string} [projectBatchID]
  * @prop {?string} [projectID]
  * @prop {?number} [batchNumber] The number of the batch inside the project, eg Batch 1
  * @prop {?string} [coverImageURL] To have an image in the card for this batch

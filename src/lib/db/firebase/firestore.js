@@ -18,6 +18,9 @@ import {
   arrayRemove as fbArrayRemove
 } from "firebase/firestore";
 
+//TODO PRIORITY change user collection name to users from userProfiles
+//TODO PRIORITY make all the functions the same as currently in mock
+
 const firestore = getFirestore(app)
 
 function getDocRef(collectionName, recordID){
@@ -38,6 +41,17 @@ async function getRecord(collectionName, recordID){
     else {
       return null
     }
+  }
+  catch(err) {
+    throw err
+  }
+}
+
+async function addRecord(collectionName, data){
+  const collection = getCollectionRef(collectionName)
+  try {
+    const newDocRef = await addDoc(collectionRef, data)
+    return newDocRef.id
   }
   catch(err) {
     throw err
@@ -90,6 +104,7 @@ async function arrayAppend(collectionName, recordID, arrayName, appendValue) {
     await updateDoc(ref, {
       [arrayName]: arrayUnion(appendValue)
     })
+    return
   }
   catch(err) {
     throw err
@@ -102,6 +117,7 @@ async function arrayRemove(collectionName, recordID, arrayName, removeValue) {
     await updateDoc(ref, {
       [arrayName]: fbArrayRemove(removeValue)
     })
+    return
   }
   catch(err) {
     throw err
@@ -123,83 +139,15 @@ async function queryCollection(collectionName, queryParams) {
   return records
 }
 
-const projects = {
-  get: projectID => getRecord('projects', projectID),
-  set: (projectID, data) => setRecord('projects', projectID, data),
-  update: (projectID, data) => updateRecord('projects', projectID, data),
-  delete: projectID => deleteRecord('projects', projectID),
-  query: queryParams => queryCollection('projects', queryParams), 
+const dbFuncs = {
+  getRecord, 
+  addRecord, 
+  setRecord, 
+  updateRecord,
+  deleteRecord,
+  arrayAppend,
+  arrayRemove,
+  queryCollection
 }
 
-const projectBatches = {
-  update: (projectBatchID, data) => updateRecord('projectBatches', projectBatchID, data),
-  delete: projectBatchID => deleteRecord('projectBatches', projectBatchID),
-  query: _ => queryCollection('projectBatches', queryParams)
-}
-
-//this is one to one so we use the projectID as the ID field
-const projectParticipants = {
-  get: projectID => getRecord('projectParticipants', projectID),
-  set: (projectID, data) => setRecord('projectParticipants', projectID, data),
-  delete: projectID => deleteRecord('projectParticipants', projectID),
-  query: queryParams => queryCollection('projectParticipants', queryParams), 
-  /**
-   * @param {string} projectID 
-   * @param {('invitedUsers'|'currentParticipants'|'declinedParticipants'|'previousParticipants')} list The list to add the user to
-   * @param {*} userID The user ID to add to the list
-   * @returns 
-   */
-  addUser: (projectID, list, userID) => arrayAppend('projectParticipants', projectID, list, userID),
-  /**
-   * @param {string} projectID 
-   * @param {('invitedUsers'|'currentParticipants'|'declinedParticipants'|'previousParticipants')} list The list to remove the user from
-   * @param {*} userID The user to remove
-   * @returns 
-   */
-  removeUser: (projectID, list, userID) => arrayRemove('projectParticipants', projectID, list, userID)
-}
-
-const specimenImages = {
-  //these get added by the server
-  delete: specimenImageRecord => deleteRecord('specimenImages', specimenImageRecord),
-  query: queryParams => queryCollection('specimenImages', queryParams) 
-}
-
-const specimens = {
-  get: specimenRecordID => getRecord('specimens', specimenRecordID),
-  set: (specimenRecordID, data) => setRecord('specimens', specimenRecordID, data),
-  update: (specimenRecordID, data) => updateRecord('specimens', specimenRecordID, data),
-  delete: specimenRecordID => deleteRecord('specimens', specimenRecordID),
-  query: queryParams => queryCollection('specimens', queryParams), 
-}
-
-const userProfiles = {
-  get: userID => getRecord('userProfiles', userID),
-  set: (userID, data) => setRecord('userProfiles', userID, data),
-  update: (userID, data) => updateRecord('userProfiles', userID, data),
-  delete: userID => deleteRecord('userProfiles', userID),
-  query: qryParams => queryCollection('userProfiles', qryParams), 
-}
-
-const userProjects = {
-  get: userID => getRecord('userProjects', userID),
-  set: (userID, data) => setRecord('userProjects', userID, data),
-  delete: userID => deleteRecord('userProjects', userID),
-  //no query, we don't need to query these...
-  addProject: (userID, list, projectID) => arrayAppend('userProjects', userID, list, projectID),
-  removeProject: (userID, list, projectID) => arrayRemove('userProjects', userID, list, projectID)
-}
-
-
-//this works
-const out = {
-  projects,
-  projectBatches,
-  projectParticipants,
-  specimenImages,
-  specimens,
-  userProfiles,
-  userProjects
-}
-
-export default out
+export default dbFuncs

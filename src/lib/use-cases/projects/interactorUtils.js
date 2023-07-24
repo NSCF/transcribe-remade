@@ -1,6 +1,7 @@
 import { makeID } from '../../utils/makeID.js'
 import getSpecimenIdentifierFromBarcode from "../../utils/getSpecimenIdentifierFromBarcode.js"
 
+//for checking if image file names for uploading are unique (they may have been selected from different directories)
 export const areFileNamesUnique = fileList => {
   const fileNames = Array.from(fileList).map(file => file.name)
   duplicateFileNames = fileNames.filter((elem, pos) => { arr.indexOf(elem) == pos })
