@@ -6,7 +6,7 @@ import makeAcceptProjectInvitation from "./makeAcceptProjectInvitation.js"
 import makeDeclineProjectInvitation from "./makeDeclineProjectInvitation.js"
 import makeLeaveProject from "./makeLeaveProject.js"
 
-const addInvitedProject = makeAcceptProjectInvitation(db)
+const addInvitedProject = makeAddInvitedProject(db)
 const getUserProjects = makeGetUserProjects(db)
 const acceptProjectInvitation = makeAcceptProjectInvitation(db)
 const declineProjectInvitation = makeDeclineProjectInvitation(db)

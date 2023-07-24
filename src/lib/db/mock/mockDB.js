@@ -2,11 +2,11 @@
 
 import { compileMongoQuery } from 'mongo-query-compiler'
 import { makeID } from '../../utils/makeID.js'
-import projects from "./projects.js"
-import projectBatches from "./projectBatches.js"
-import projectParticipants from "./projectParticipants.js"
-import userProjects from "./userProjects.js"
-import users from "./users.js"
+import projects from "./collectionDataFiles/projects.json" assert {type: 'json'} 
+import projectBatches from "./collectionDataFiles/projectBatches.json" assert {type: 'json'}
+import projectParticipants from "./collectionDataFiles/projectParticipants.json" assert {type: 'json'}
+import userProjects from "./collectionDataFiles/userProjects.json" assert {type: 'json'}
+import users from "./collectionDataFiles/users.json" assert {type: 'json'}
 
 
 const mockDB = {

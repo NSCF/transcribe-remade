@@ -1,7 +1,7 @@
 <script>
 
   import ProjectForm from "$lib/components/ProjectForm.svelte";
-  import {createProject, uploadProjectImage} from '$lib/interactors/projectInteractors'
+  import {createProject, uploadProjectImage} from '$lib/use-cases/projects'
 
  /** @type {User} */
  export let user = null

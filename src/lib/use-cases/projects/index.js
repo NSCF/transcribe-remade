@@ -3,7 +3,7 @@ import makeCreateProject from "./makeCreateProject.js";
 import uploadProjectImage from './uploadProjectImage.js'
 import makeCloseProject from "./makeCloseProject.js";
 
-const createProject = makeCloseProject(db)
+const createProject = makeCreateProject(db)
 const closeProject = makeCloseProject(db)
 
 export {

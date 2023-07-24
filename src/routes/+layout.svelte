@@ -1,5 +1,8 @@
 <script>
   import "../app.css";
+  
+  //and we need to initialize firebase
+  import firebaseApp from '$lib/db/firebase/firebaseapp'
 
 </script>
 
@@ -12,6 +15,7 @@
       <a href="/" class="btn nav">Home</a>
       <a href="/addproject" class="btn nav">Projects</a>
       <a href="/signin" class="btn nav">Sign in</a>
+      <a href="/signup" class="btn nav primary">Sign up</a>
     </div>
   </nav>
   <div class="p-2 w-full flex-1 min-h-0 border rounded">

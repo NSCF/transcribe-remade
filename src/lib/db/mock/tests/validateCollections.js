@@ -1,11 +1,11 @@
 //make sure that the fake records all match up
 //TODO this is not complete, currently users and user projects only...
 
-import projects from "../projects.js"
-import projectBatches from "../projectBatches.js"
-import projectParticipants from "../projectParticipants.js"
-import userProjects from "../userProjects.js"
-import users from "../users.js"
+import projects from "../collectionDataFiles/projects.json"
+import projectBatches from "../collectionDataFiles/projectBatches.json"
+import projectParticipants from "../collectionDataFiles/projectParticipants.json"
+import userProjects from "../collectionDataFiles/userProjects.json"
+import users from "../collectionDataFiles/users.json"
 
 //check user projects are all existing projects
 for (const [userID, user] of Object.entries(users)) {
