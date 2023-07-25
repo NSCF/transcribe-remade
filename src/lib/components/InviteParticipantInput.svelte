@@ -1,6 +1,6 @@
 <script>
   import { userProfiles } from '$lib/db'
-  import { normalizeEmail } from '$lib/utils/normalizeEmail';
+  import normalizeEmail from '$lib/utils/normalizeEmail';
   import {createEventDispatcher} from 'svelte'
   const dispatch = createEventDispatcher()
 

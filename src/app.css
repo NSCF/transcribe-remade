@@ -7,11 +7,11 @@
 }
 
 .btn {
-  @apply h-12 p-2 border rounded w-32 hover:ring-2;
+  @apply h-12 p-2  rounded w-32 hover:ring-2;
 }
 
 .nav {
-  @apply border border-black;
+  
 }
 
 .primary {

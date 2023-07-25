@@ -1,6 +1,5 @@
 import { getAuth, createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
 
-
 export default function(createUserProfile) {
   return async function(userData) {
   

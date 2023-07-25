@@ -1,20 +1,22 @@
 <script>
   import Spinner from '../elements/Spinner.svelte'; 
-  import { signUpUser } from '$lib/use-cases/users'
-  import  userModel from '$lib/controllers/users/userPresenter';
+  import { newUser } from '$lib/stores/newUser';
+  import singUpController from '$lib/adapters/users/signUpUserController';
 
-  let registering = false //this is signing up and creating the user profile
+  let registering = false
+  let submitAttempt = false
   let errorMessage = 'This is an error message'
   let errorDialog = null
+  let form = null
 
   const attemptSignUp = async _ => {
     registering = true
     
     try {
-      const userProfile = await signUpUser(userModel)
+      const userProfile = await singUpController.signUpUser($newUser)
     }
     catch(err) {
-      console.error(err)
+      submitAttempt = true
       errorMessage = err.message 
       errorDialog.showModal()
     }
@@ -23,34 +25,39 @@
 
   }
 
+  const clearForm = _ => {
+    submitAttempt = false
+    $newUser.clear()
+    form.reset() //we need this because svelte can't see the changes from $newUser.clear()
+  }
+
 </script>
 
-<form class="mt-8 p-2 border rounded" autocomplete="new">
+<form class="mt-8 p-2 border rounded" autocomplete="new" bind:this={form}>
   <legend class="text-xl">
     Sign Up:
   </legend>
   <p class="text-sm font-light">
-    new users
+    new users (* required fields)
   </p>
   <div class="mt-2 flex gap-2">
-    <input type="text" class="flex-1" placeholder="first/given name" autocomplete="new" bind:value={userModel.firstName}>
-    <input type="text" class="flex-1" placeholder="last/family name" autocomplete="new" bind:value={userModel.lastName}>
+    <input type="text" class="flex-1 ring-red-500" class:ring-2={submitAttempt && !$newUser.firstNameIsValid()} placeholder="first/given name*" autocomplete="new" bind:value={$newUser.firstName}>
+    <input type="text" class="flex-1 ring-red-500" placeholder="last/family name*" autocomplete="new" bind:value={$newUser.lastName}>
   </div>
   <div class="mt-2 flex gap-2">
-    <input type="text" class="w-3/4" placeholder="affiliation" bind:value={userModel.affiliation}>
-    <input type="text" class="min-w-0 flex-1" placeholder="acronym" bind:value={userModel.affiliationAbbreviation}>
-
+    <input type="text" class="w-3/4 ring-red-500" placeholder="affiliation" bind:value={$newUser.affiliation}>
+    <input type="text" class="min-w-0 flex-1 ring-red-500" placeholder="acronym" bind:value={$newUser.affiliationAbbreviation}>
   </div>
   <div class="mt-2 flex gap-2">
-    <input type="text" class="flex-1" placeholder="email" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="new" bind:value={userModel.email}>
-    <input type="text" class="flex-1" placeholder="confirm email" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="new" bind:value={userModel.emailConf}>
+    <input type="text" class="flex-1 ring-red-500" class:ring-2={submitAttempt && !$newUser.emailIsValid()} placeholder="email*" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="new" bind:value={$newUser.email}>
+    <input type="text" class="flex-1 ring-red-500" class:ring-2={submitAttempt && !$newUser.emailsMatch()} placeholder="confirm email*" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="new" bind:value={$newUser.emailConf}>
   </div>
   <div class="my-2 flex gap-2">
-    <input type="text" class="flex-1" placeholder="password" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="new" bind:this={userModel.password}>
-    <input type="password" class="flex-1" placeholder="confirm password" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="new" bind:this={userModel.password}>
+    <input type="password" class="flex-1 ring-red-500" class:ring-2={submitAttempt && !$newUser.passwordIsValid()} placeholder="password*" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="new" bind:value={$newUser.password}>
+    <input type="password" class="flex-1 ring-red-500" class:ring-2={submitAttempt && !$newUser.passwordsMatch()} placeholder="confirm password*" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="new" bind:value={$newUser.passwordConf}>
   </div>
   <div class="flex justify-between">
-    <button class="btn border rounded" on:click|preventDefault={userModel.clear}>Clear</button>
+    <button class="btn border rounded" on:click|preventDefault={clearForm}>Clear</button>
     {#if registering}
     <Spinner />
     {:else}
@@ -64,8 +71,8 @@
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>    
   </button>
-  <div class="font-semibold">
-    <p>There was a problem signing up:</p>
+  <div class="text-center"> 
+    <p class="font-semibold">There was a problem signing up: </p>
     <p>{errorMessage}</p>
   </div>
 </dialog>
