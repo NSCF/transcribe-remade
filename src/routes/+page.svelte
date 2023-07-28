@@ -1,7 +1,7 @@
 <div>
   This is now just the home page...
   <a href="specimen">Go to image viewer</a>
-  <a href="newproject">Go to project form</a>
+  <a href="projects/newproject">Go to project form</a>
 
   <form action="http://localhost:3000/imageupload" method="post"  enctype="multipart/form-data">
     <input type="text" name="projectid" id="projectid" placeholder="project id">

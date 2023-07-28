@@ -1,6 +1,6 @@
 <script>
-  import { userProfiles } from '$lib/db'
-  import normalizeEmail from '$lib/utils/normalizeEmail';
+  import db from '../../db'
+  import normalizeEmail from '../../app/utils/normalizeEmail';
   import {createEventDispatcher} from 'svelte'
   const dispatch = createEventDispatcher()
 
@@ -35,15 +35,23 @@
   }
 
   const findUserProfile = async _ => {
-    return userProfiles.query({
-      $or: [ 
-        { searchEmail: searchName || searchEmail } , 
-        { firstName: searchName || searchEmail }, 
-        { lastName: searchName || searchEmail },
-        { firstName: (searchName || searchEmail).replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) },
-        { lastName: (searchName || searchEmail).replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) }
-       ]
-    })
+    try {
+
+      const userProfiles = await db.users.search({
+        $or: [ 
+          { searchEmail: searchName || searchEmail } , 
+          { firstName: searchName || searchEmail }, 
+          { lastName: searchName || searchEmail },
+          { firstName: (searchName || searchEmail).replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) },
+          { lastName: (searchName || searchEmail).replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) }
+         ]
+      })
+
+      return userProfiles
+    }
+    catch(err) {
+      alert(err.message)
+    }
   }
 
   const dispatchValue = value => {

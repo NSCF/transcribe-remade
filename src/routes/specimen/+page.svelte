@@ -1,6 +1,6 @@
 <script>
   import ImageViewer from "$lib/components/ImageViewer.svelte";
-  import DataForm from "$lib//components/DataForm.svelte";
+  import DataForm from "$lib/forms/DataForm.svelte";
 
   let images = ['PRU0006054.dzi',
     'PRU0038707.dzi',

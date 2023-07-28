@@ -1,5 +1,5 @@
 <script>
-  import SignIn from "$lib/components/forms/SignIn.svelte";
+  import SignIn from "$forms/SignIn.svelte";
 </script>
 
 <div class="w-1/3 mx-auto" >
