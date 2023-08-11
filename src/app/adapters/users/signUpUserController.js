@@ -1,4 +1,4 @@
-import { signUpUser as signUpUserUseCase } from "$use-cases/users";
+import { signUpUser as signUpUserUseCase } from "../../use-cases/users";
 
 const controller = {
   async signUpUser(newUserViewModel) {

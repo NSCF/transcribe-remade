@@ -4,7 +4,7 @@
 import { faker } from '@faker-js/faker/locale/en_ZA';
 import projects from './projects.js'
 import projectParticipants from './projectParticipants.js'
-import { makeID } from '../../../utils/makeID.js';
+import { makeID } from '../../../app/utils/makeID.js';
 
 let projectBatches = {}
 
@@ -48,6 +48,9 @@ for (const project of Object.values(projects)) {
     //get the number of batches completed
     const numberCompleted = faker.datatype.number({max: project.batchCount})
     const numberChecked =  faker.datatype.number({max: numberCompleted})
+
+    project.batchesCaptured = numberCompleted
+    project.batchesChecked = numberChecked
 
     for (let i = 0; i < numberCompleted; i++) {
       batches[i].recordsCaptured = batches[i].specimenCount

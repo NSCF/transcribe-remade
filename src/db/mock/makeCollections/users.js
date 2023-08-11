@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker/locale/en_ZA';
-import { makeID } from '../../utils/makeID.js';
-import normalizeEmail from '../../utils/normalizeEmail.js';
+import { makeID } from '../../../app/utils/makeID.js';
+import normalizeEmail from '../../../app/utils/normalizeEmail.js';
 
 /**
  * @type {Object<string, User>}

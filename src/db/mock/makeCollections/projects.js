@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker/locale/en_ZA';
-import { makeID } from '../../utils/makeID.js';
+import { makeID } from '../../../app/utils/makeID.js';
 import users from './users.js'
 
 /**@type {import("../../../types/Project.js").Project[]} */

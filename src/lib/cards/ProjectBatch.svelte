@@ -5,7 +5,7 @@
   export let batch
 </script>
 
-<div class="w-full shadow rounded">
+<div class="w-60 h-[200px] p-2 border rounded shadow bg-gray-50 hover:ring-2">
   <span>Batch {batch.batchNumber}</span>
   <div>imagethumbs...</div>
   <div>percentage captured</div>

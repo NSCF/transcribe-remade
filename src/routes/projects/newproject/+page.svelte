@@ -1,7 +1,7 @@
 <script>
 
-  import ProjectForm from "$forms/ProjectForm.svelte";
-  import {createProject, uploadProjectImage} from '$use-cases/projects'
+  import ProjectForm from "$lib/forms/ProjectForm.svelte";
+  import {createProject, uploadProjectImage} from '../../../app/use-cases/projects'
 
  /** @type {User} */
  export let user = null
