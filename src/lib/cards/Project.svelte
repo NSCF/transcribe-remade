@@ -9,7 +9,7 @@
 
 </script>
 
-<a href="/projects/{project.projectID}" class="relative w-60 h-[200px] p-2 border rounded shadow bg-gray-50 hover:ring-2">
+<a data-sveltekit-preload-data="tap" href="/projects/{project.projectID}" class="relative w-60 h-[200px] p-2 border rounded shadow bg-gray-50 hover:ring-2">
   <h4 class="text-2xl font-thin mb-2">{project.projectName}</h4>
   <p class="text-sm font-thin">Images: {project.specimenCount}</p>
   

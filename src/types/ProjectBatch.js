@@ -7,8 +7,9 @@
  * @prop {?number} [batchNumber] The number of the batch inside the project, eg Batch 1
  * @prop {?string} [coverImageURL] To have an image in the card for this batch
  * @prop {?number} [specimenCount] The number of specimen records in this batch
+ * @prop {?string} [claimedBy] The ID of the person who claimed this batch
+ * @prop {?Timestamp} [claimedDate] The date the batch was claimed
  * @prop {?number} [recordsCaptured] The number of records captured
- * @prop {?string} [capturedBy] The ID of the person who captured this batch
  * @prop {?Timestamp} [captureStartDate] 
  * @prop {?Timestamp} [captureEndDate]
  * @prop {?number} [recordsChecked] The number of records checked

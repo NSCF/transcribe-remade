@@ -2,11 +2,11 @@
 // these data files will be read when creating mockDB
 
 import * as fs from 'fs/promises';
+import users from "./users.js"
 import projects from "./projects.js"
 import projectBatches from "./projectBatches.js"
 import projectParticipants from "./projectParticipants.js"
 import userProjects from "./userProjects.js"
-import users from "./users.js"
 
 await fs.writeFile('../collectionDataFiles/projects.json', JSON.stringify(projects, null, 2))
 await fs.writeFile('../collectionDataFiles/projectBatches.json', JSON.stringify(projectBatches, null, 2))

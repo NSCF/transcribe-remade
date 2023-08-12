@@ -19,8 +19,9 @@ for (const project of Object.values(projects)) {
       projectID: project.projectID,
       batchNumber,
       specimenCount: project.batchSize, //we fix the last one below
+      claimedBy: null,
+      claimedDate: null,
       recordsCaptured: 0,
-      capturedBy: null,
       captureStartDate: null,
       captureEndDate: null,
       recordsChecked: 0,
@@ -54,8 +55,9 @@ for (const project of Object.values(projects)) {
 
     for (let i = 0; i < numberCompleted; i++) {
       batches[i].recordsCaptured = batches[i].specimenCount
-      batches[i].capturedBy = contributors[faker.datatype.number({max: contributors.length - 1})]
-      batches[i].captureStartDate = faker.date.between(project.createdDate, Date.now()).getTime()
+      batches[i].claimedBy = contributors[faker.datatype.number({max: contributors.length - 1})]
+      batches[i].claimedDate = faker.date.between(project.createdDate, Date.now()).getTime()
+      batches[i].captureStartDate = faker.date.between(batches[i].claimedDate, Date.now()).getTime()
       let minsToComplete = faker.datatype.number({max: 3000})
       batches[i].captureEndDate = batches[i].captureStartDate + (minsToComplete * 60 * 1000)
 
@@ -70,7 +72,7 @@ for (const project of Object.values(projects)) {
         do {
           checkedBy = contributors[faker.datatype.number({max: contributors.length - 1})]
         }
-        while(checkedBy == batches[i].capturedBy)
+        while(checkedBy == batches[i].claimedBy)
 
         batches[i].checkedBy = checkedBy
 
@@ -114,8 +116,9 @@ for (const project of Object.values(projects)) {
     contributors.sort(() => 0.5 - Math.random()) //randomize them again
     for (const [index, batch] of partiallyCaptured.entries()) {
       batch.recordsCaptured = faker.datatype.number({max: batch.specimenCount})
-      batch.capturedBy = contributors[index]
-      batch.captureStartDate = faker.date.between(project.createdDate, Date.now()).getTime()
+      batch.claimedBy = contributors[index]
+      batch.claimedDate = faker.date.between(project.createdDate, Date.now()).getTime()
+      batch.captureStartDate = faker.date.between(batch.claimedDate, Date.now()).getTime()
       project.capturedRecordCount += batch.recordsCaptured
     }
 

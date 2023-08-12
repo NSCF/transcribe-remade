@@ -9,7 +9,7 @@ const projectNames = [
   'PRE Senecio 2023', 
   'PRU QuickGuide 20230413', 
   'PRU vagrant monocots 20230510',
-  'NU accesion May 2022',
+  'NU accession May 2022',
   'NBG request 12Apr',
   'BOL Iridaceae 2022 Batch 1'
 ]

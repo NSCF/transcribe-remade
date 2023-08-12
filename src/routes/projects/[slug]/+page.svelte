@@ -13,7 +13,7 @@
 
 <div class="p-2 w-full h-full flex flex-col">
   <div class="flex-0 w-full flex justify-between">
-    <h1 class="text-2xl font-light">{project.projectName}</h1>
+    <h1 class="text-2xl font-light"><a href="/projects">Projects</a> &gt;&gt; {project.projectName}</h1>
     <p class="font-light">Created: {toISODate(project.createdDate)}</p>
   </div>
   <div class="flex-1 min-h-0 w-full flex gap-2 flex-wrap overflow-y-scroll">
