@@ -122,8 +122,8 @@ export default function(startTimestamp, endTimeStamp) {
     if(startDateParts[3] == thisYear) {
       return startDateParts.slice(1,3).join(' ')
     }
-    else {
-      return startDateParts.slice(1).join(' ')
+    else { //else show the modified ISO date
+      return timestampToISODate(startTimestamp).split('T')[0].replace(/-/g, '/')
     }
     
     // if (dateParts[dateParts.length - 1] == thisYear) {

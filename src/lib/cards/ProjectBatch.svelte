@@ -47,7 +47,7 @@
     {/if}
   {/if}
   {#if batch.checkedBy}
-  <div class="text-sm rounded bg-orange-200">
+  <div class="text-sm">
     checked by: {batch.checkedBy.firstName} | {batch.checkEndDate? showDate(batch.checkEndDate) : 'in process'}
   </div>
   {/if}

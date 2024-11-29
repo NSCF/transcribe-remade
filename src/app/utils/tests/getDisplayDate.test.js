@@ -38,11 +38,11 @@ describe('getDisplayDate with startDate only', _ => {
 
   })
 
-  it('should return day month and year if a different year',  _ => {
+  it('should return modified ISO date if in different year',  _ => {
     const thisYear = new Date().getFullYear()
     testDate.setFullYear(thisYear - 1)
 
-    expect(getDisplayDate(testDate.getTime()).split(' ')).toHaveLength(3) //this is indirect, risky
+    expect(getDisplayDate(testDate.getTime()).split('/')).toHaveLength(3) //this is indirect, risky
 
   })
 })
